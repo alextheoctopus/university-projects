@@ -18,7 +18,9 @@ const Holetzkiy = () => {
     const resultMatrixDouble = (matrix) => {
         let newMatrix = matrix.map((stroke, i) => {
             return stroke.map((point, i) => {
-                if (i === 0) { return "[ " + point.toFixed(3) + " " } else if (i === stroke.length - 1) { return point.toFixed(3) + " ]" } else { return " " + point.toFixed(3) + " " }
+                if (i === 0) { return "[ " + point.toFixed(3) + " " }
+                else if (i === stroke.length - 1) { return point.toFixed(3) + " ]" }
+                else { return " " + point.toFixed(3) + " " }
             });
         });
         return newMatrix.map((stroke) => { return <p>{stroke}</p> });
