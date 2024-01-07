@@ -1,10 +1,6 @@
 import Method from '../Method';
 export default class NewtonPolynom extends Method {
 
-    constructor(points) {
-        super(points);
-    }
-
     round = x => Math.round(x * 100) / 100;
 
     try(){
@@ -37,6 +33,7 @@ export default class NewtonPolynom extends Method {
             y += divDiffMatrix[0][i] * xPolies
             xPolies *= x - this.vectX[i]
         }
+        console.log(y);
         return y;
     }
 

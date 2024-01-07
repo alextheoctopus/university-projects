@@ -1,9 +1,6 @@
-import ParabolicSpline from './interpolation/methods/ParabolicSpline';
 import NewtonPolynom from './interpolation/methods/NewtonPolynom';
-import BestRmsFitFunction from './interpolation/methods/BestRmsFitFunction';
-// import Graph from './graph2D/Graph';
 import Canvas from './graph2D/Canvas';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 const Interpolation = () => {
     const point = (x, y) => {
         return { x, y }
@@ -26,41 +23,9 @@ const Interpolation = () => {
         point(1.0, N),
     ]
 
-    // const parabolicSpline = new ParabolicSpline(points);
     const newtonPoly = new NewtonPolynom(points);
-    // const rmsFitFunc = new BestRmsFitFunction(points);
-    // const graph = Graph(WINDOW);
+    const defineYbyNewtonPoly = newtonPoly.defineYbyNewtonPoly.bind(newtonPoly);
 
-    // graph.clear();
-    // graph.printOXY();
-    // points.forEach(point => graph.point(point.x, point.y))
-
-    // const defineYbyNewtonPoly = newtonPoly.defineYbyNewtonPoly.bind(newtonPoly);
-
-
-    // const defineParabolicSpline = parabolicSpline.defineParabolicSpline.bind(parabolicSpline);
-
-    // const defineBestRmsFitFunc = rmsFitFunc.defineBestRmsFitFunc.bind(rmsFitFunc);
-
-
-    // {
-    //     const table = document.querySelector('table');
-    //     let strX = points.reduce((str, point) => str + `<td>${point.x}</td>`, '')
-    //     let strY = points.reduce((str, point) => str + `<td>${Math.round(point.y * 100) / 100}</td>`, '')
-    // document.getElementById('pointsOutput').appendChild(table);
-    // document.getElementById('coordX').innerHTML += strX
-    // document.getElementById('coordY').innerHTML += strY
-    // document.querySelectorAll('td').forEach(elem => {
-    //     elem.style.border = '1px solid'
-    // })
-    // }
-
-    // document.getElementById('newtonPolyOutput').innerHTML += newtonPoly.polynomInStr();
-
-    // document.getElementById('getY').addEventListener('click', () => {
-    //     let x = document.getElementById('xInput').value - 0;
-    //     document.getElementById('yOutput').innerHTML = newtonPoly.defineYbyNewtonPoly(x);
-    // })
     let cells = {
         display: 'inline-block',
         width: "35px",
@@ -68,17 +33,19 @@ const Interpolation = () => {
         border: "1px solid black",
         padding: "5px",
     };
+
+    const [yValue, setYValue] = useState("...")
+
     const inputRef = useRef();
     const yFuncOutput = () => {
         const x = inputRef.current;
-        console.log(x.value);
-       let y = newtonPoly.defineYbyNewtonPoly(x);
-       console.log(y);
+        console.log(x.value - 0);
+        setYValue(defineYbyNewtonPoly(x.value - 0));
     }
 
     return (
         <div style={{ display: "grid", gridTemplateRows: "auto" }}>
-            <h2>Таблица значений</h2>
+            <h2 style={{ marginLeft: "0px", marginRight: "auto", marginBottom: "10px"}}>Таблица значений</h2>
             <div style={{ width: (points.length + 1) * 55 }}>
                 <div style={cells}>x</div>
                 {points.map((value, i) => <div key={i} style={cells}>{value.x.toString()}</div>)}
@@ -87,22 +54,25 @@ const Interpolation = () => {
                 <div style={cells}>y</div>
                 {points.map((value, i) => <div key={i} style={cells}>{Math.round(value.y * 100) / 100}</div>)}
             </div>
-            <h2>Интерполяционный многочлен Ньютона:</h2>
+            <h2 style={{ marginLeft: "0px", marginRight: "auto", marginBottom: "10px"}}>Интерполяционный многочлен Ньютона:</h2>
             <p>{newtonPoly.polynomInStr()}</p>
-            <p>N{'('}<input ref={inputRef} style={{ width: "30px" }}/>{')'}
-                <button id="getY" style={{ background: "#574de3" }} onClick={yFuncOutput}>=</button>
-
-            </p>
-            <Canvas></Canvas>
-            <h4 style={{ color: "black" }}>Сплайн</h4>
-            <h4 style={{ color: "blue" }}>Среднеквадратичное приближение</h4>
-            <h4 style={{ color: "red" }}>Функция через полином Ньютона</h4>
-            {/* // document.getElementById('getY').addEventListener('click', () => {
-    //     let x = document.getElementById('xInput').value - 0;
-    //     document.getElementById('yOutput').innerHTML = newtonPoly.defineYbyNewtonPoly(x);
-    // }) */}
-
-        </div>
+            <h2 style={{ marginLeft: "0px", marginRight: "auto", marginBottom: "10px"}}>Значение функции:</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "25px 25px 10px 50px 30px", marginLeft: "auto", marginRight: "auto", marginBottom: "10px" }}>
+                <td>N{'('}</td>
+                <input ref={inputRef} style={{ width: "15px", padding: "2px" }} />
+                <td style={{ padding: "0px" }}>{')'}</td>
+                <div id="getY" style={{ width: "50px", backgroundColor: "#42c264" }} onClick={yFuncOutput}>=</div>
+                <td style={{ padding: "auto" }}>{yValue}</td>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: "50px" }}>
+                <Canvas></Canvas>
+                <div style={{ margingLeft: "100px" }}>
+                    <h4 style={{ color: "black" }}>Сплайн</h4>
+                    <h4 style={{ color: "blue" }}>Среднеквадратичное приближение</h4>
+                    <h4 style={{ color: "red" }}>Функция через полином Ньютона</h4>
+                </div>
+            </div>
+        </div >
     );
 }
 export default Interpolation;
