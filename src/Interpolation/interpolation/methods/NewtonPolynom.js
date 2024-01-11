@@ -3,9 +3,6 @@ export default class NewtonPolynom extends Method {
 
     round = x => Math.round(x * 100) / 100;
 
-    try(){
-        console.log(999);
-    }
     defineDividedDifferences() {
 
         const matrix = this.matrMaths.createZeroMatrix(this.n)
@@ -33,7 +30,6 @@ export default class NewtonPolynom extends Method {
             y += divDiffMatrix[0][i] * xPolies
             xPolies *= x - this.vectX[i]
         }
-        console.log(y);
         return y;
     }
 

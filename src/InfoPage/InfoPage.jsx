@@ -6,6 +6,8 @@ import Gauss from '../GauseRunge/Gauss';
 import HoletzkiyZeidel from '../taskText/HoletzkiyZeidel';
 import GaussRungeText from '../taskText/GaussRungeText';
 import Interpolation from '../Interpolation/Interpolation';
+import Jordan from '../Jordan/Jordan';
+import Vizhener from '../Vizhener/Vizhener';
 const InfoPage = ({ page }) => {
     return (
         <>
@@ -27,13 +29,19 @@ const InfoPage = ({ page }) => {
                             </div>
                         </div>
                         : page === 'Interpolation' ?
-                        <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
-                            {/* <InterpolationText></InterpolationText> */}
-                            <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr" }}>
+                            <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
+                                {/* <InterpolationText></InterpolationText> */}
                                 <Interpolation></Interpolation>
                             </div>
-                        </div>
-                        : ''}
+                            : page === 'Jordan' ?
+                                <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
+                                    <Jordan></Jordan>
+                                </div>
+                                : page === 'Vizhener' ?
+                                    <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
+                                        <Vizhener></Vizhener>
+                                    </div>
+                                    : ''}
         </>);
 }
 export default InfoPage;

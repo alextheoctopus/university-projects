@@ -4,7 +4,7 @@ import InfoPage from './InfoPage/InfoPage';
 import { useState } from 'react';
 import MainPage from './MainPage/MainPage';
 function App() {
-  const [page, setPage] = useState('Interpolation');
+  const [page, setPage] = useState('Vizhener');
   const [sideBar, openSideBar] = useState(false);
   const buttonStyle = {
     backgroundColor: "grey",
