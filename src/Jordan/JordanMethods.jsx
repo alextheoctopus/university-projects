@@ -1,26 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 const JordanMethods = (props) => {
-        // const [styleGrid, setStyleGrid] = useState("bee ");
-        const style = () => {
-                let styleGrid = [];
-                for (let i = 1; i < props.numOfColumns.length; i++) {
-                        styleGrid.push(i);
-                }
-                console.log(styleGrid);
-        }
-        style();
-
-        function createInputs(columns, strokes) {
-                let inputsArray = new Array(columns * strokes).fill("");;
-                console.log("Jordan", inputsArray);
-                return inputsArray.map((val, ind) => {
-                        return <input key={ind} style={{
-                                width: "25px",
-                                borderRadius: "3px", marginBottom: "3px"
-                        }} />
-                });
-        }
-        return (<div style={{ display: "grid", gridTemplateColumns: "40px 40px" }}>{createInputs(props.numOfColumns, props.numOfStrokes)}</div>);
+        
 }
 export default JordanMethods;
 /*

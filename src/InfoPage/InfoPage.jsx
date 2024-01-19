@@ -8,6 +8,7 @@ import GaussRungeText from '../taskText/GaussRungeText';
 import Interpolation from '../Interpolation/Interpolation';
 import Jordan from '../Jordan/Jordan';
 import Vizhener from '../Vizhener/Vizhener';
+import Scytala from '../Scytala/Scytala';
 const InfoPage = ({ page }) => {
     return (
         <>
@@ -41,7 +42,11 @@ const InfoPage = ({ page }) => {
                                     <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
                                         <Vizhener></Vizhener>
                                     </div>
-                                    : ''}
+                                    : page === 'Scytala' ?
+                                        <div style={{ display: 'grid', gridTemplateRows: "auto" }}>
+                                            <Scytala></Scytala>
+                                        </div>
+                                        : ''}
         </>);
 }
 export default InfoPage;

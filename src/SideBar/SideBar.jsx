@@ -11,6 +11,9 @@ const SideBar = (props) => {
         backgroundColor: '#EDF2F2',
     }
     return (<div style={barStyle}>
+        <button style={buttonStyle} onClick={() => props.setPage('Scytala')}>
+            <p style={{ color: "black" }}>Шифрование Скитала</p>
+        </button>
         <button style={buttonStyle} onClick={() => props.setPage('Vizhener')}>
             <p style={{ color: "black" }}>Шифрование квадратом Виженера</p>
         </button>
